@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "jambi"
+version = "0.1.0"
+description = ""
+authors = ["Bruno Lauwers <bruno@infinite8.nl>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+jinja2 = "^3.1.2"
+pyyaml = "^6.0"
+markdown = "^3.4.3"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.2.0"
+ruff = "^0.0.263"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
