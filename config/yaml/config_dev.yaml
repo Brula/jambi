@@ -1,4 +1,2 @@
 env: dev
-
-database:
-  connection_string: "database/data.db"
+database_connection_string: "dev_database/data.db"
