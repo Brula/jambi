@@ -160,3 +160,6 @@ poetry.lock
 
 # Development DB
 data.db
+
+# Output folder
+output/
