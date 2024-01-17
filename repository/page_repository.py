@@ -12,6 +12,6 @@ def get_pages() -> List[Page]:
 
     pages = []
     for page in result:
-        pages.append(Page(title=page[0], content=page[1], file_name=page[2]))
+        pages.append(Page(title=page[0], content=page[1], file_name=page[2], template_name=page[3]))
 
     return pages
