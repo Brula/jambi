@@ -3,9 +3,9 @@ from markdown import markdown
 
 from repository.model.model import Page
 
-def render_template(template_name: str, output_folder: str, page: Page) -> None:
+def render_template(template_name: str, output_folder: str, template_folder: str, page: Page) -> None:
     env = Environment(
-        loader=FileSystemLoader(searchpath="./templates"),
+        loader=FileSystemLoader(searchpath="./" + template_folder),
         autoescape=False
     )
 

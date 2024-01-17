@@ -1,14 +1,13 @@
 import sqlite3
 from typing import List
 
-import config.config as config
 from repository.model.model import Page
 
-def get_pages() -> List[Page]:
-    connection_string = config.current_config.database_connection_string
+def get_pages(table_name: str, database_connection_string: str) -> List[Page]:
+    connection_string = database_connection_string
     con = sqlite3.connect(connection_string)
     cursor = con.cursor()
-    result = cursor.execute("SELECT title, content, file_name, template_name from pages").fetchall()
+    result = cursor.execute("SELECT title, content, file_name, template_name from " + table_name).fetchall()
 
     pages = []
     for page in result:

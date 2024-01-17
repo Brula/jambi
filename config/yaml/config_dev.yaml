@@ -1,2 +1,6 @@
 env: dev
+
 database_connection_string: "dev_database/data.db"
+output_folder: "output"
+template_folder: "templates"
+pages_table_name: "pages"
