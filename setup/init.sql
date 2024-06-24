@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS 'pages'(
+    page_id INTEGER PRIMARY KEY,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    file_name VARCHAR(256) NOT NULL,
+    template_name VARCHAR(256) NOT NULL
+)
