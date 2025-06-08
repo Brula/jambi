@@ -164,3 +164,9 @@ data.db
 # Specific folders
 output/
 templates/
+
+# Mac specific
+.DS_Store
+
+# Local database files
+*.db
