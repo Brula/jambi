@@ -3,7 +3,7 @@ import os
 import shutil
 
 from config.config import load_config
-from rendering_engine.template_rendering import render_template
+from rendering.template_rendering import render_template
 from repository.page_repository import get_pages
 
 def build(env: str) -> None:
