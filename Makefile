@@ -1,7 +1,7 @@
 .PHONY: setup build typecheck serve
 
 # Install dependencies and initialize development database
-setup:
+install:
 	poetry run -- ./setup.py
 
 # Build static pages from database content using templates
@@ -19,7 +19,7 @@ serve:
 # Show available commands
 help:
 	@echo "Available commands:"
-	@echo "  make setup      - Install dependencies and initialize database"
+	@echo "  make install      - Install dependencies and initialize database"
 	@echo "  make build      - Build static pages from database"
 	@echo "  make typecheck  - Run type checking"
 	@echo "  make serve      - Start development server"
