@@ -1,5 +1,7 @@
 import sqlite3
 from typing import List
+from datetime import datetime
+from datetime import datetime
 
 from config.config import load_config
 from repository.model.model import Page
@@ -25,3 +27,32 @@ def create_page(title: str, content: str, template_name: str, file_name: str):
     con.commit()
 
     return cursor.lastrowid
+
+def get_all_pages() -> List[Page]:
+    """Get all pages from the database with their metadata.
+    
+    Returns:
+        List[Page]: List of all pages in the database
+    """
+    config = load_config("dev")
+    con = sqlite3.connect(config.database_connection_string)
+    cursor = con.cursor()
+    result = cursor.execute("""
+        SELECT page_id, title, content, template_name, file_name, 
+               created_at, updated_at 
+        FROM pages 
+        ORDER BY updated_at DESC
+    """).fetchall()
+
+    pages = []
+    for page in result:
+        pages.append(Page(
+            title=page[1],
+            content=page[2],
+            template_name=page[3],
+            file_name=page[4],
+            created_at=datetime.fromisoformat(page[5]) if page[5] else None,
+            updated_at=datetime.fromisoformat(page[6]) if page[6] else None
+        ))
+
+    return pages

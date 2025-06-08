@@ -3,5 +3,7 @@ CREATE TABLE IF NOT EXISTS 'pages'(
     title TEXT NOT NULL,
     content TEXT NOT NULL,
     file_name VARCHAR(256) NOT NULL,
-    template_name VARCHAR(256) NOT NULL
+    template_name VARCHAR(256) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
