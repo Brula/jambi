@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Create New Page - Jambi CMS</title>
+  <link rel="stylesheet" type="text/css" href="assets/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <div class="container">
+    <div class="logo">
+      <a href='/'>
+        <img src="assets/infinite8.svg" />
+      </a>
+    </div>
+
+    {% if error %}
+    <div class="error-message">
+      {{ error }}
+    </div>
+    {% endif %}
+
+    <div class="page-header">
+      <h1>Create New Page</h1>
+    </div>
+
+    <form method="POST" action="/create" class="page-form">
+      <div class="form-group">
+        <label for="title">Page Title</label>
+        <input type="text" id="title" name="title" required placeholder="Enter page title"
+          value="{{ form.title if form else '' }}">
+      </div>
+
+      <div class="form-group">
+        <label for="content">Content (Markdown supported)</label>
+        <div class="editor-toolbar">
+          <span class="tab active">markdown</span>
+          <span class="tab">preview</span>
+        </div>
+        <textarea id="content" name="content" required spellcheck="false" placeholder="# Your content here
+
+Write using Markdown syntax:
+
+## Formatting
+- **Bold text** using **double asterisks**
+- *Italic text* using *single asterisks*
+- Create lists with hyphens
+
+## Links and Images
+[Link text](https://example.com)
+![Image alt text](image-url.jpg)
+
+## Code
+```javascript
+// Code blocks use triple backticks
+const example = 'Hello World';
+```">{{ form.content if form else '' }}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="template_name">Template</label>
+        <select id="template_name" name="template_name" required>
+          <option value="">Select a template</option>
+          <option value="default" {% if form and form.template_name=='default' %}selected{% endif %}>Default</option>
+          <option value="infinite8" {% if form and form.template_name=='infinite8' %}selected{% endif %}>Infinite8
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="file_name">File Name</label>
+        <input type="text" id="file_name" name="file_name" required placeholder="e.g. my-page.html"
+          pattern="[a-zA-Z0-9\-]+\.html?" title="Only letters, numbers, and hyphens allowed. Must end in .html"
+          value="{{ form.file_name if form else '' }}">
+        <div class="form-help">Only letters, numbers, and hyphens. Will be saved as .html</div>
+      </div>
+
+      <div class="form-actions">
+        <a href="/" class="button secondary">Cancel</a>
+        <button type="submit" class="button primary">Create Page</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

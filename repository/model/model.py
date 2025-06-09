@@ -8,5 +8,6 @@ class Page:
     content: str
     file_name: str
     template_name: str
+    page_id: Optional[int] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None

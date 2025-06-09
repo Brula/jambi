@@ -1,27 +1,149 @@
-from fastapi import FastAPI
-from typing import Union
+"""FastAPI server module for Jambi CMS.
 
-from repository.page_repository import create_page
+This module provides the main web application and handles page
+viewing, creation, and editing functionality.
+"""
+from fastapi import FastAPI, Request, Form
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import Response, RedirectResponse
+from pathlib import Path
+from typing import List
+import re
 
-app = FastAPI()
+from repository.page_repository import create_page, get_all_pages
+from repository.model.model import Page
 
-@app.get("/")
-async def root():
-    return {"Hello": "Index page"}
+app = FastAPI(
+    title="Jambi",
+    description="A headless CMS for generating static websites"
+)
 
-@app.get("/new")
-async def new_page_get():
-    return {"Hello": "New page"}
+# Mount static files
+# Reason: Assets need to be served from /assets URL for frontend
+app.mount("/assets", StaticFiles(directory=Path(__file__).parent / "ui" / "assets"), name="assets")
 
-@app.get("/edit")
-async def edit_page():
-    return {"Hello": "Edit page"}
+# Setup templates
+# Reason: Templates are stored in the ui directory within the server package
+templates = Jinja2Templates(directory=Path(__file__).parent / "ui")
 
-@app.post("/new")
-async def new_page_post(request):
-    title = request.form.get('title')
-    content = request.form.get('content')
-    template_name = request.form.get('template_name')
-    file_name = request.form.get('file_name')
+@app.get("/", response_model=None)
+async def root(request: Request) -> Response:
+    """Serve the index page with list of all pages.
+    
+    Args:
+        request: The FastAPI request object
+        
+    Returns:
+        TemplateResponse: Rendered index page with list of pages
+    """
+    pages: List[Page] = get_all_pages()
+    return templates.TemplateResponse(
+        request=request,
+        name="index.html",
+        context={
+            "page_title": "Jambi CMS",
+            "pages": pages
+        }
+    )
 
-    create_page(title=title, content=content, template_name=template_name, file_name=file_name)
+@app.get("/create")
+async def create_page_get(request: Request):
+    """Show the create page form.
+    
+    Args:
+        request: The FastAPI request object
+        
+    Returns:
+        TemplateResponse: Rendered create page form
+    """
+    return templates.TemplateResponse(
+        request=request,
+        name="create.html",
+        context={}
+    )
+
+def validate_filename(filename: str) -> bool:
+    """Validate that a filename contains only allowed characters and ends in .html.
+    
+    Args:
+        filename: The filename to validate
+        
+    Returns:
+        bool: True if filename is valid, False otherwise
+    """
+    pattern = r'^[a-zA-Z0-9\-]+\.html$'
+    return bool(re.match(pattern, filename))
+
+@app.post("/create")
+async def create_page_post(
+    request: Request,
+    title: str = Form(...),
+    content: str = Form(...),
+    template_name: str = Form(...),
+    file_name: str = Form(...)
+):
+    """Handle creation of a new page.
+    
+    Args:
+        request: The FastAPI request object
+        title: The page title
+        content: The page content (markdown)
+        template_name: The template to use
+        file_name: The output filename
+        
+    Returns:
+        RedirectResponse: Redirect to index on success
+        TemplateResponse: Render form with error on failure
+    """
+    # Validate input
+    errors = []
+    if not title.strip():
+        errors.append("Title is required")
+    if not content.strip():
+        errors.append("Content is required") 
+    if template_name not in ['default', 'infinite8']:
+        errors.append("Invalid template selected")
+    if not validate_filename(file_name):
+        errors.append("Invalid filename. Use only letters, numbers, and hyphens, ending in .html")
+
+    if errors:
+        return templates.TemplateResponse(
+            request=request,
+            name="create.html",
+            context={
+                "error": " ".join(errors),
+                "form": {
+                    "title": title,
+                    "content": content,
+                    "template_name": template_name,
+                    "file_name": file_name
+                }
+            },
+            status_code=400
+        )
+
+    try:
+        # Create the page
+        create_page(
+            title=title,
+            content=content,
+            template_name=template_name,
+            file_name=file_name
+        )
+        return RedirectResponse(url="/", status_code=303)
+    except Exception as e:
+        return templates.TemplateResponse(
+            request=request,
+            name="create.html",
+            context={
+                "error": "Failed to create page: " + str(e),
+                "form": {
+                    "title": title,
+                    "content": content,
+                    "template_name": template_name,
+                    "file_name": file_name
+                }
+            },
+            status_code=500
+        )
