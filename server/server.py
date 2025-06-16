@@ -96,6 +96,10 @@ async def create_page_post(
         RedirectResponse: Redirect to index on success
         TemplateResponse: Render form with error on failure
     """
+    # Add .html if no extension is present and doesn't already end with .html
+    if not file_name.lower().endswith('.html') and '.' not in file_name:
+        file_name = file_name + '.html'
+
     # Validate input
     errors = []
     if not title.strip():

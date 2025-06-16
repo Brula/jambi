@@ -71,3 +71,21 @@ def test_create_page_validation():
         
         # Check form value preservation
         assert test_data["content"] in content  # Content should be preserved
+
+def test_create_page_appends_html_extension():
+    """Test that a filename without extension gets .html appended automatically."""
+    test_data = {
+        "title": "No Extension Page",
+        "content": "Some content.",
+        "template_name": "default",
+        "file_name": "no-extension"
+    }
+    from repository.page_repository import get_all_pages
+    with TestClient(app) as client:
+        response = client.post("/create", data=test_data)
+        assert response.status_code in (200, 303)
+        pages = get_all_pages()
+        # Find the page we just created
+        created = next((p for p in pages if p.title == "No Extension Page"), None)
+        assert created is not None
+        assert created.file_name == "no-extension.html"
