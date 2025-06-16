@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{page_title}}</title>
-    <link rel="stylesheet" type="text/css" href="assets/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
-    <div class="container">
-      <div class="logo">
-        <a href='/'>
-          <img src="assets/infinite8.svg" />
-        </a>
-      </div>
-      
-      <div class="page-controls">
-        <a href="/create" class="button create-page">Create New Page</a>
-      </div>
 
-      <div class="pages-list">
-        {% if pages %}
-          {% for page in pages %}
-            <div class="page-item">
-              <h2><a href="/page/{{ page.id }}">{{ page.title }}</a></h2>
-              <div class="page-meta">
-                <span class="date">Last updated: {{ page.updated_at.strftime('%Y-%m-%d %H:%M') }}</span>
-              </div>
-            </div>
-          {% endfor %}
-        {% else %}
-          <p class="no-pages">No pages created yet. Click the button above to create your first page!</p>
-        {% endif %}
-      </div>
+<head>
+  <title>{{page_title}}</title>
+  <link rel="stylesheet" type="text/css" href="assets/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-      <p class="footer">Made with &#128150; by Infinite8 in Utrecht</p>
+<body>
+  <div class="container">
+    <div class="logo">
+      <a href='/'>
+        <img src="assets/infinite8.svg" />
+      </a>
     </div>
-  </body>
+
+    <div class="page-controls">
+      <a href="/create" class="button create-page">Create New Page</a>
+    </div>
+
+    <div class="pages-list">
+      {% if pages %}
+      {% for page in pages %}
+      <div class="page-item">
+        <h2><a href="/page/{{ page.page_id }}">{{ page.title }}</a></h2>
+        <div class="page-meta">
+          <span class="date">Last updated: {{ page.updated_at.strftime('%Y-%m-%d %H:%M') if page.updated_at else ''
+            }}</span>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <p class="no-pages">No pages created yet. Click the button above to create your first page!</p>
+      {% endif %}
+    </div>
+
+    <p class="footer">Made with &#128150; by Infinite8 in Utrecht</p>
+  </div>
+</body>
+
 </html>
