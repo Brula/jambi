@@ -1,4 +1,4 @@
-.PHONY: setup build typecheck serve
+.PHONY: setup build typecheck serve test
 
 # Install dependencies and initialize development database
 install:
@@ -16,6 +16,10 @@ typecheck:
 serve:
 	poetry run -- uvicorn server.server:app --reload
 
+# Run tests using pytest
+test:
+	poetry run pytest
+
 # Show available commands
 help:
 	@echo "Available commands:"
@@ -23,3 +27,4 @@ help:
 	@echo "  make build      - Build static pages from database"
 	@echo "  make typecheck  - Run type checking"
 	@echo "  make serve      - Start development server"
+	@echo "  make test       - Run tests"
