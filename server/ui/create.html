@@ -70,10 +70,10 @@ const example = 'Hello World';
 
       <div class="form-group">
         <label for="file_name">File Name</label>
-        <input type="text" id="file_name" name="file_name" required placeholder="e.g. my-page.html"
-          pattern="[a-zA-Z0-9\-]+\.html?" title="Only letters, numbers, and hyphens allowed. Must end in .html"
+        <input type="text" id="file_name" name="file_name" required placeholder="e.g. my-page" pattern="[a-zA-Z0-9\-]+"
+          title="Only letters, numbers, and hyphens allowed. Do not add an extension."
           value="{{ form.file_name if form else '' }}">
-        <div class="form-help">Only letters, numbers, and hyphens. Will be saved as .html</div>
+        <div class="form-help">Only letters, numbers, and hyphens.</div>
       </div>
 
       <div class="form-actions">
