@@ -23,10 +23,19 @@
       {% if pages %}
       {% for page in pages %}
       <div class="page-item">
-        <h2><a href="/page/{{ page.page_id }}">{{ page.title }}</a></h2>
-        <div class="page-meta">
-          <span class="date">Last updated: {{ page.updated_at.strftime('%Y-%m-%d %H:%M') if page.updated_at else ''
-            }}</span>
+        <div class="page-row">
+          <div>
+            <h2><a href="/page/{{ page.page_id }}">{{ page.title }}</a></h2>
+            <div class="page-meta">
+              <span class="date">Last updated: {{ page.updated_at.strftime('%Y-%m-%d %H:%M') if page.updated_at else '' }}</span>
+            </div>
+          </div>
+          <div class="page-actions">
+            <a href="/edit/{{ page.page_id }}" class="button secondary">Edit</a>
+            <form method="POST" action="/delete/{{ page.page_id }}" style="display:inline;">
+              <button type="submit" class="button delete">Delete</button>
+            </form>
+          </div>
         </div>
       </div>
       {% endfor %}
@@ -39,4 +48,5 @@
   </div>
 </body>
 
+<script src="assets/delete-confirm.js"></script>
 </html>

@@ -228,8 +228,12 @@ input[type="submit"]:hover {
 }
 
 .button.secondary {
-  background-color: #f5f5f5;
-  color: #333;
+  background-color: #567dd1; 
+  color: #fff;
+}
+.button.secondary:hover {
+  background-color: #5072cf; 
+  color: #fff;
 }
 
 .button:hover {
@@ -305,4 +309,45 @@ input[type="submit"]:hover {
   src: url('OpenSans-Light.ttf');
   font-weight: normal;
   font-style: normal;
+}
+
+.page-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.page-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.button.delete {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+.button.delete:hover {
+  background: #fecaca;
+  color: #991b1b;
+}
+
+.page-actions form {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.page-actions .button,
+.page-actions .button.delete,
+.page-actions .button.secondary {
+  min-width: 90px;
+  height: 40px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
