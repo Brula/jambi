@@ -16,7 +16,7 @@
     </div>
 
     <div class="page-controls">
-      <a href="/create" class="button create-page">Create New Page</a>
+      <a href="/create" class="button create-page">New Page</a>
     </div>
 
     <div class="pages-list">
@@ -31,7 +31,7 @@
             </div>
           </div>
           <div class="page-actions">
-            <a href="/edit/{{ page.page_id }}" class="button secondary">Edit</a>
+            <a href="/create?page_id={{ page.page_id }}" class="button secondary">Edit</a>
             <form method="POST" action="/delete/{{ page.page_id }}" style="display:inline;">
               <button type="submit" class="button delete">Delete</button>
             </form>
