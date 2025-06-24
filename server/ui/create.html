@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Create New Page - Jambi CMS</title>
+  <title>Create Page - Jambi CMS</title>
   <link rel="stylesheet" type="text/css" href="assets/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -22,7 +22,7 @@
     {% endif %}
 
     <div class="page-header">
-      <h1>Create New Page</h1>
+      <h1>Create Page</h1>
     </div>
 
     <form method="POST" action="/create" class="page-form">
@@ -33,10 +33,9 @@
       </div>
 
       <div class="form-group">
-        <label for="content">Content (Markdown supported)</label>
+        <label for="content">Content</label>
         <div class="editor-toolbar">
-          <span class="tab active">markdown</span>
-          <span class="tab">preview</span>
+          <span class="tab active">Markdown</span>
         </div>
         <textarea id="content" name="content" required spellcheck="false" placeholder="# Your content here
 
@@ -63,8 +62,7 @@ const example = 'Hello World';
         <select id="template_name" name="template_name" required>
           <option value="">Select a template</option>
           <option value="default" {% if form and form.template_name=='default' %}selected{% endif %}>Default</option>
-          <option value="infinite8" {% if form and form.template_name=='infinite8' %}selected{% endif %}>Infinite8
-          </option>
+          <option value="infinite8" {% if form and form.template_name=='infinite8' %}selected{% endif %}>Infinite8</option>
         </select>
       </div>
 
@@ -77,8 +75,8 @@ const example = 'Hello World';
       </div>
 
       <div class="form-actions">
-        <a href="/" class="button secondary">Cancel</a>
         <button type="submit" class="button primary">Create Page</button>
+        <a href="/" class="button secondary">Cancel</a>
       </div>
     </form>
   </div>

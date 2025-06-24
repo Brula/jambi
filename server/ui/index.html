@@ -16,7 +16,7 @@
     </div>
 
     <div class="page-controls">
-      <a href="/create" class="button create-page">New Page</a>
+      <a href="/create" class="button primary">New Page</a>
     </div>
 
     <div class="pages-list">
@@ -25,13 +25,12 @@
       <div class="page-item">
         <div class="page-row">
           <div>
-            <h2><a href="/page/{{ page.page_id }}">{{ page.title }}</a></h2>
+            <h2><a href="/create?page_id={{ page.page_id }}">{{ page.title }}</a></h2>
             <div class="page-meta">
               <span class="date">Last updated: {{ page.updated_at.strftime('%Y-%m-%d %H:%M') if page.updated_at else '' }}</span>
             </div>
           </div>
           <div class="page-actions">
-            <a href="/create?page_id={{ page.page_id }}" class="button secondary">Edit</a>
             <form method="POST" action="/delete/{{ page.page_id }}" style="display:inline;">
               <button type="submit" class="button delete">Delete</button>
             </form>
