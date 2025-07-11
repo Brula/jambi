@@ -33,16 +33,16 @@ app.mount("/assets", StaticFiles(directory=Path(__file__).parent / "ui" / "asset
 # Reason: Templates are stored in the ui directory within the server package
 templates = Jinja2Templates(directory=Path(__file__).parent / "ui")
 
+"""Serve the index page with list of all pages.
+
+Args:
+    request: The FastAPI request object
+    
+Returns:
+    TemplateResponse: Rendered index page with list of pages
+"""
 @app.get("/", response_model=None)
 async def root(request: Request) -> Response:
-    """Serve the index page with list of all pages.
-    
-    Args:
-        request: The FastAPI request object
-        
-    Returns:
-        TemplateResponse: Rendered index page with list of pages
-    """
     pages: List[Page] = get_all_pages()
     return templates.TemplateResponse(
         request=request,
@@ -53,12 +53,19 @@ async def root(request: Request) -> Response:
         }
     )
 
-@app.get("/create")
-async def create_page_get(request: Request, page_id: int | None = None):
-    """Show the create/edit page form.
+"""Show the create/edit page form.
+
+If page_id is provided, prefills the form with existing page data.
+
+Args:
+    request: The FastAPI request object
+    page_id: Optional page ID to edit existing page
     
-    If page_id is provided, prefills the form with existing page data.
-    """
+Returns:
+    Response: Rendered template response with the form
+"""
+@app.get("/create")
+async def create_page_get(request: Request, page_id: int | None = None) -> Response:
     if page_id is not None:
         page = get_page_by_id(page_id)
         if not page:
@@ -78,19 +85,30 @@ async def create_page_get(request: Request, page_id: int | None = None):
         )
     return render_page_form(request, form={})
 
-def validate_filename(filename: str) -> bool:
-    """Validate that a filename contains only allowed characters and ends in .html.
+"""Validate that a filename contains only allowed characters and ends in .html.
+
+Args:
+    filename: The filename to validate
     
-    Args:
-        filename: The filename to validate
-        
-    Returns:
-        bool: True if filename is valid, False otherwise
-    """
+Returns:
+    bool: True if filename is valid, False otherwise
+"""
+def validate_filename(filename: str) -> bool:
     pattern = r'^[a-zA-Z0-9\-]+\.html$'
     return bool(re.match(pattern, filename))
 
-def validate_page_form(title, content, template_name, file_name):
+"""Validate form data for page creation/editing.
+
+Args:
+    title: The page title to validate
+    content: The page content to validate
+    template_name: The template name to validate
+    file_name: The filename to validate
+    
+Returns:
+    List[str]: List of validation error messages, empty if valid
+"""
+def validate_page_form(title: str, content: str, template_name: str, file_name: str) -> List[str]:
     errors = []
     if not title.strip():
         errors.append("Title is required")
@@ -102,7 +120,20 @@ def validate_page_form(title, content, template_name, file_name):
         errors.append("Invalid filename. Use only letters, numbers, and hyphens, ending in .html")
     return errors
 
-def render_page_form(request, form, error=None, edit_mode=False, page_id=None, status_code=400):
+"""Render the page creation/editing form with optional error message.
+
+Args:
+    request: The FastAPI request object
+    form: Dictionary containing form data to prefill
+    error: Optional error message to display
+    edit_mode: Whether the form is for editing (True) or creating (False)
+    page_id: The ID of the page being edited (if edit_mode is True)
+    status_code: HTTP status code to return with the response
+    
+Returns:
+    Response: Rendered template response with the form
+"""
+def render_page_form(request: Request, form: dict, error: str | None = None, edit_mode: bool = False, page_id: int | None = None, status_code: int = 400) -> Response:
     context = {"form": form, "edit_mode": edit_mode}
     if error:
         context["error"] = error
@@ -115,6 +146,20 @@ def render_page_form(request, form, error=None, edit_mode=False, page_id=None, s
         status_code=status_code
     )
 
+"""Handle both creation and editing of pages.
+
+Args:
+    request: The FastAPI request object
+    title: The page title
+    content: The page content (markdown)
+    template_name: The template to use
+    file_name: The output filename
+    page_id: The page ID if editing, None if creating
+    
+Returns:
+    RedirectResponse: Redirect to index on success
+    TemplateResponse: Render form with error on failure
+"""
 async def handle_page_form(
     request: Request,
     title: str,
@@ -122,21 +167,7 @@ async def handle_page_form(
     template_name: str,
     file_name: str,
     page_id: int | None = None
-):
-    """Handle both creation and editing of pages.
-    
-    Args:
-        request: The FastAPI request object
-        title: The page title
-        content: The page content (markdown)
-        template_name: The template to use
-        file_name: The output filename
-        page_id: The page ID if editing, None if creating
-        
-    Returns:
-        RedirectResponse: Redirect to index on success
-        TemplateResponse: Render form with error on failure
-    """
+) -> Response:
     is_edit_mode = page_id is not None
 
     # Add .html if no extension is present
@@ -193,6 +224,22 @@ async def handle_page_form(
             status_code=500
         )
 
+"""Handle creation or editing of a page via POST request.
+
+If page_id is provided, updates the existing page.
+If page_id is not provided, creates a new page.
+
+Args:
+    request: The FastAPI request object
+    title: The page title from form data
+    content: The page content from form data (markdown)
+    template_name: The template name from form data
+    file_name: The output filename from form data
+    page_id: Optional page ID for editing existing pages
+    
+Returns:
+    Response: Redirect to index on success, or rendered form with errors on failure
+"""
 @app.post("/create")
 async def create_page_post(
     request: Request,
@@ -201,16 +248,18 @@ async def create_page_post(
     template_name: str = Form(...),
     file_name: str = Form(...),
     page_id: int | None = Form(None)
-):
-    """Handle creation or editing of a page.
-    
-    If page_id is provided, updates the existing page.
-    If page_id is not provided, creates a new page.
-    """
+) -> Response:
     return await handle_page_form(request, title, content, template_name, file_name, page_id)
 
+"""Delete a page by its ID and redirect to the index page.
+
+Args:
+    page_id: The ID of the page to delete
+    
+Returns:
+    RedirectResponse: Redirect to the index page after deletion
+"""
 @app.post("/delete/{page_id}")
-async def delete_page(page_id: int):
-    """Delete a page by its id and redirect to index."""
+async def delete_page(page_id: int) -> RedirectResponse:
     delete_page_by_id(page_id)
     return RedirectResponse(url="/", status_code=status.HTTP_303_SEE_OTHER)
