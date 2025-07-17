@@ -10,7 +10,7 @@ def build(env: str) -> None:
     current_config = load_config(env)
     pages = get_pages(current_config.pages_table_name, current_config.database_connection_string)
     output_folder = current_config.output_folder
-    css_folder = output_folder + "/static"
+    css_folder = output_folder + "/assets"
 
     if os.path.exists(output_folder):
         shutil.rmtree(output_folder, ignore_errors=True)

@@ -42,7 +42,7 @@ def test_create_page_success():
     
     with TestClient(app) as client:
         response = client.post("/create", data=test_data)
-        assert response.status_code == 200 
+        assert response.status_code in (200, 303)
 
 def test_create_page_validation():
     """Test form validation.

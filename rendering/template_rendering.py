@@ -15,6 +15,6 @@ def render_template(template_name: str, output_folder: str, template_folder: str
     return _output_to_file(file_name=page.file_name, output=output, output_folder=output_folder)
 
 def _output_to_file(file_name: str, output: str, output_folder: str) -> None:
-    output_file = open(output_folder + "/" + file_name + ".html", "w")
+    output_file = open(output_folder + "/" + file_name, "w")
     output_file.write(output)
     return output_file.close()

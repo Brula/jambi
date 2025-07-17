@@ -74,8 +74,12 @@ const example = 'Hello World';
         <div class="form-help">Only letters, numbers, and hyphens.</div>
       </div>
 
+      {% if edit_mode and page_id is not none %}
+      <input type="hidden" name="page_id" value="{{ page_id }}">
+      {% endif %}
+
       <div class="form-actions">
-        <button type="submit" class="button primary">Create Page</button>
+        <button type="submit" class="button primary">Save Page</button>
         <a href="/" class="button secondary">Cancel</a>
       </div>
     </form>

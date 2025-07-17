@@ -133,7 +133,7 @@ Args:
 Returns:
     Response: Rendered template response with the form
 """
-def render_page_form(request: Request, form: dict, error: str | None = None, edit_mode: bool = False, page_id: int | None = None, status_code: int = 400) -> Response:
+def render_page_form(request: Request, form: dict, error: str | None = None, edit_mode: bool = False, page_id: int | None = None, status_code: int = 200) -> Response:
     context = {"form": form, "edit_mode": edit_mode}
     if error:
         context["error"] = error
