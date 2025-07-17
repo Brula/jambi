@@ -18,6 +18,7 @@ This will fetch your pages from the database and build them using the templates 
 After building your webpages they can be found in the `output` directory.
 
 ### Testing
+For testing we use pytest. The test directory structure mirrors the directory structure of the main application. We strive to test all codepaths in the python code by unit tests. To run all the tests in the test directory, run `make test`.
 
 ### Running locally
 

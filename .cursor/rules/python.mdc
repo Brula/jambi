@@ -9,7 +9,7 @@ alwaysApply: false
 - Use pydantic for data validation
 - Use FastAPI for APIs
 - Write docstrings for every function
-- Don't place docstrings inside function bodies, always place them above the function signature
+- Don't place docstrings inside function bodies, always place them above the function signature.
 - Always create Pytest unit tests for new features
 - After updating any logic, check whether existing unit tests need to be updated. If so, do it
 - Tests should live in a /tests folder mirroring the main app structure
