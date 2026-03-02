@@ -173,3 +173,8 @@ templates/
 
 # Dolt database files (added by bd init)
 .dolt/
+
+# Elixir/Phoenix build artifacts
+_build/
+deps/
+mix.lock
