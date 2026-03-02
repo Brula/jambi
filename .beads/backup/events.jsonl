@@ -1,1 +1,18 @@
 {"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T07:51:14Z","event_type":"created","id":1,"issue_id":"jambi-er0","new_value":"","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T07:51:17Z","event_type":"created","id":2,"issue_id":"jambi-2y6","new_value":"","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T07:51:19Z","event_type":"created","id":3,"issue_id":"jambi-nvi","new_value":"","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T07:51:20Z","event_type":"created","id":4,"issue_id":"jambi-91x","new_value":"","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T07:51:21Z","event_type":"created","id":5,"issue_id":"jambi-3uy","new_value":"","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T07:51:22Z","event_type":"created","id":6,"issue_id":"jambi-68h","new_value":"","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T07:51:23Z","event_type":"created","id":7,"issue_id":"jambi-sg3","new_value":"","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T07:51:24Z","event_type":"created","id":8,"issue_id":"jambi-ro0","new_value":"","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T07:51:26Z","event_type":"created","id":9,"issue_id":"jambi-24v","new_value":"","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T07:51:27Z","event_type":"created","id":10,"issue_id":"jambi-b1y","new_value":"","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T07:57:42Z","event_type":"claimed","id":11,"issue_id":"jambi-2y6","new_value":"{\"assignee\":\"Bruno Lauwers\",\"status\":\"in_progress\"}","old_value":"{\"id\":\"jambi-2y6\",\"title\":\"Create Phoenix project structure\",\"description\":\"Set up the basic Phoenix project structure for Jambi, including configuration files, directory layout, and initial dependencies.\",\"status\":\"open\",\"priority\":1,\"issue_type\":\"task\",\"owner\":\"mail@brunolauwers.nl\",\"created_at\":\"2026-03-02T06:51:18Z\",\"created_by\":\"Bruno Lauwers\",\"updated_at\":\"2026-03-02T06:51:18Z\"}"}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T07:57:51Z","event_type":"closed","id":12,"issue_id":"jambi-2y6","new_value":"Completed","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T08:02:17Z","event_type":"created","id":13,"issue_id":"jambi-vay","new_value":"","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T08:02:18Z","event_type":"created","id":14,"issue_id":"jambi-a0p","new_value":"","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T08:02:19Z","event_type":"created","id":15,"issue_id":"jambi-0q4","new_value":"","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T08:02:20Z","event_type":"created","id":16,"issue_id":"jambi-19r","new_value":"","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T08:02:21Z","event_type":"created","id":17,"issue_id":"jambi-f8j","new_value":"","old_value":""}
+{"actor":"Bruno Lauwers","comment":null,"created_at":"2026-03-02T08:02:22Z","event_type":"created","id":18,"issue_id":"jambi-0vr","new_value":"","old_value":""}
