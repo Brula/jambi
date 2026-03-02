@@ -165,6 +165,10 @@ data.db
 output/
 templates/
 
+# Phoenix static assets
+dev_database/
+.beads/
+
 # Mac specific
 .DS_Store
 
