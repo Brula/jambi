@@ -2,6 +2,7 @@
 {"created_at":"2026-03-02T07:51:17Z","created_by":"Bruno Lauwers","depends_on_id":"jambi-er0","issue_id":"jambi-2y6","type":"discovered-from"}
 {"created_at":"2026-03-02T07:51:21Z","created_by":"Bruno Lauwers","depends_on_id":"jambi-er0","issue_id":"jambi-3uy","type":"discovered-from"}
 {"created_at":"2026-03-02T09:29:26Z","created_by":"Bruno Lauwers","depends_on_id":"jambi-3uy","issue_id":"jambi-3uy.1","type":"parent-child"}
+{"created_at":"2026-03-02T09:32:46Z","created_by":"Bruno Lauwers","depends_on_id":"jambi-3uy","issue_id":"jambi-3uy.2","type":"parent-child"}
 {"created_at":"2026-03-02T07:51:22Z","created_by":"Bruno Lauwers","depends_on_id":"jambi-er0","issue_id":"jambi-68h","type":"discovered-from"}
 {"created_at":"2026-03-02T07:51:20Z","created_by":"Bruno Lauwers","depends_on_id":"jambi-er0","issue_id":"jambi-91x","type":"discovered-from"}
 {"created_at":"2026-03-02T07:51:27Z","created_by":"Bruno Lauwers","depends_on_id":"jambi-er0","issue_id":"jambi-b1y","type":"discovered-from"}
