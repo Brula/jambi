@@ -170,3 +170,6 @@ templates/
 
 # Local database files
 *.db
+
+# Dolt database files (added by bd init)
+.dolt/
