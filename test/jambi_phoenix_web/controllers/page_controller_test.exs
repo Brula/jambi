@@ -2,7 +2,6 @@
 defmodule JambiPhoenixWeb.PageControllerTest do
   use JambiPhoenixWeb.ConnCase
   alias JambiPhoenix.Pages
-  alias JambiPhoenix.Pages.Page
 
   setup do
     # Create a test page
