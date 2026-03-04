@@ -1,30 +1,40 @@
-.PHONY: setup build typecheck serve test
+.PHONY: setup build serve test format lint precommit
 
-# Install dependencies and initialize development database
-install:
-	poetry run -- ./setup.py
+# Install dependencies and setup assets
+setup:
+	mix setup
 
 # Build static pages from database content using templates
 build:
-	poetry run -- ./jambi.py
-
-# Run type checking with strict settings
-typecheck:
-	poetry run -- mypy --strict ./jambi.py
+	mix run --no-halt
 
 # Start the development server with auto-reload
 serve:
-	poetry run -- uvicorn server.server:app --reload
+	mix phx.server
 
-# Run tests using pytest
+# Run tests
 test:
-	poetry run pytest
+	mix test
+
+# Format code
+format:
+	mix format
+
+# Run linter (credential check)
+lint:
+	mix creds
+
+# Run precommit checks (compile, format, test)
+precommit:
+	mix precommit
 
 # Show available commands
 help:
 	@echo "Available commands:"
-	@echo "  make install      - Install dependencies and initialize database"
-	@echo "  make build      - Build static pages from database"
-	@echo "  make typecheck  - Run type checking"
-	@echo "  make serve      - Start development server"
-	@echo "  make test       - Run tests"
+	@echo "  make setup        - Install dependencies and setup assets"
+	@echo "  make build        - Build static pages from database"
+	@echo "  make serve        - Start development server"
+	@echo "  make test         - Run tests"
+	@echo "  make format       - Format code"
+	@echo "  make lint         - Run linter"
+	@echo "  make precommit    - Run precommit checks"
