@@ -64,6 +64,12 @@ config :jambi_phoenix, JambiPhoenix.Repo,
   database: Path.expand("../dev_database/jambi.db", __DIR__),
   pool_size: 10
 
+# Application-specific configuration
+# Output folder for generated static pages
+config :jambi_phoenix,
+  output_folder: Path.expand("../priv/output", __DIR__),
+  template_folder: Path.expand("../lib/jambi_phoenix_web/templates/static_page_view", __DIR__)
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

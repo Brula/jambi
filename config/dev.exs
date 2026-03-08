@@ -76,3 +76,8 @@ config :phoenix_live_view,
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
+
+# Development-specific paths
+config :jambi_phoenix,
+  output_folder: Path.expand("../priv/output", __DIR__),
+  template_folder: Path.expand("../lib/jambi_phoenix_web/templates/static_page_view", __DIR__)

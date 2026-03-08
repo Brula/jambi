@@ -99,4 +99,12 @@ if config_env() == :prod do
   #     config :swoosh, :api_client, Swoosh.ApiClient.Req
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+
+  # Production-specific paths (can be overridden via environment variables)
+  output_folder = System.get_env("OUTPUT_FOLDER") || Path.expand("../priv/output", __DIR__)
+  template_folder = System.get_env("TEMPLATE_FOLDER") || Path.expand("../lib/jambi_phoenix_web/templates/static_page_view", __DIR__)
+
+  config :jambi_phoenix,
+    output_folder: output_folder,
+    template_folder: template_folder
 end

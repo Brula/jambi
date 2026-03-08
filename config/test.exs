@@ -22,3 +22,8 @@ config :phoenix, :plug_init_mode, :runtime
 # Enable helpful, but potentially expensive runtime checks
 config :phoenix_live_view,
   enable_expensive_runtime_checks: true
+
+# Test-specific paths (use temporary directories)
+config :jambi_phoenix,
+  output_folder: Path.expand("../tmp/test_output", __DIR__),
+  template_folder: Path.expand("../lib/jambi_phoenix_web/templates/static_page_view", __DIR__)

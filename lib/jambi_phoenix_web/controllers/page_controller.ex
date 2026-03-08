@@ -145,8 +145,8 @@ defmodule JambiPhoenixWeb.PageController do
 
   # Template management endpoints
   def list_templates(conn, _params) do
-    # List available HEEx templates in the static_page_view directory
-    template_dir = "lib/jambi_phoenix_web/templates/static_page_view"
+    # Get template folder from configuration
+    template_dir = Application.get_env(:jambi_phoenix, :template_folder, "lib/jambi_phoenix_web/templates/static_page_view")
 
     case File.ls(template_dir) do
       {:ok, files} ->
@@ -178,8 +178,8 @@ defmodule JambiPhoenixWeb.PageController do
   end
 
   def create_template(conn, %{"name" => name, "content" => content}) do
-    template_dir = "lib/jambi_phoenix_web/templates/static_page_view"
-    template_path = "#{template_dir}/#{name}.heex"
+    template_dir = Application.get_env(:jambi_phoenix, :template_folder, "lib/jambi_phoenix_web/templates/static_page_view")
+    template_path = Path.join(template_dir, "#{name}.heex")
 
     # Ensure templates directory exists
     File.mkdir_p!(template_dir)
@@ -202,7 +202,8 @@ defmodule JambiPhoenixWeb.PageController do
   end
 
   def get_template(conn, %{"name" => name}) do
-    template_path = "lib/jambi_phoenix_web/templates/static_page_view/#{name}.heex"
+    template_dir = Application.get_env(:jambi_phoenix, :template_folder, "lib/jambi_phoenix_web/templates/static_page_view")
+    template_path = Path.join(template_dir, "#{name}.heex")
 
     case File.read(template_path) do
       {:ok, content} ->
@@ -218,7 +219,8 @@ defmodule JambiPhoenixWeb.PageController do
   end
 
   def update_template(conn, %{"name" => name, "content" => content}) do
-    template_path = "lib/jambi_phoenix_web/templates/static_page_view/#{name}.heex"
+    template_dir = Application.get_env(:jambi_phoenix, :template_folder, "lib/jambi_phoenix_web/templates/static_page_view")
+    template_path = Path.join(template_dir, "#{name}.heex")
 
     case File.read(template_path) do
       {:error, :enoent} ->
@@ -247,7 +249,8 @@ defmodule JambiPhoenixWeb.PageController do
   end
 
   def delete_template(conn, %{"name" => name}) do
-    template_path = "lib/jambi_phoenix_web/templates/static_page_view/#{name}.heex"
+    template_dir = Application.get_env(:jambi_phoenix, :template_folder, "lib/jambi_phoenix_web/templates/static_page_view")
+    template_path = Path.join(template_dir, "#{name}.heex")
 
     case File.exists?(template_path) do
       true ->
