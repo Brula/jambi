@@ -168,6 +168,7 @@ templates/
 # Phoenix static assets
 dev_database/
 .beads/
+priv/static/assets/css/app.css
 
 # Mac specific
 .DS_Store
