@@ -9,3 +9,4 @@
 {"key":"compaction_enabled","value":"false"}
 {"key":"issue_prefix","value":"jambi"}
 {"key":"schema_version","value":"6"}
+{"key":"status.custom","value":"complete,done"}
